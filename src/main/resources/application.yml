@@ -1,0 +1,5 @@
+#spring.application.name: PlayWrightAutomation
+#junit.jupiter.execution.parallel.mode.default: concurrent
+Browser:
+  name: chrome
+  headless: false
