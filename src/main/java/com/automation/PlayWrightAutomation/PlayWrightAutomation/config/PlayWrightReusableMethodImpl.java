@@ -63,4 +63,11 @@ public class PlayWrightReusableMethodImpl implements PlayWrightReusableMethod {
     public Page getPlayWrightPage() {
    return page;
     }
+
+    @Override
+    public Playwright getPlayWright() {
+        return playWright;
+    }
+
+
 }

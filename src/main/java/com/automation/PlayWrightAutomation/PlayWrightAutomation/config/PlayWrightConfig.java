@@ -3,6 +3,7 @@ package com.automation.PlayWrightAutomation.PlayWrightAutomation.config;
 import com.automation.PlayWrightAutomation.PlayWrightAutomation.annotation.LazyConfiguration;
 import com.automation.PlayWrightAutomation.PlayWrightAutomation.annotation.ThreadScopeBean;
 import com.microsoft.playwright.*;
+import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -19,7 +21,7 @@ import java.util.Collections;
 public class PlayWrightConfig {
 
     private final BrowserConfig browser;
-
+    PlayWrightReusableMethod playWrightReusableMethod;
   /*  @ThreadScopeBean
     @ConditionalOnProperty(name = "Browser.name", havingValue = "chrome")
     public BrowserContext init(){
@@ -35,8 +37,16 @@ public class PlayWrightConfig {
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public PlayWrightReusableMethod init(){
         log.info("Starting playwright ");
-
-        return new PlayWrightReusableMethodImpl(browser.getBrowserName(), new BrowserType.LaunchOptions()
+        playWrightReusableMethod= new PlayWrightReusableMethodImpl(browser.getBrowserName(), new BrowserType.LaunchOptions()
                 .setHeadless(browser.getHeadlessFlag()));
+        return playWrightReusableMethod;
+    }
+
+    @PreDestroy
+    public void close() {
+        CompletableFuture.runAsync(() ->
+                playWrightReusableMethod.getPlayWrightPage().close());
+        playWrightReusableMethod.getPlayWrightBrowserContext().close();
+        playWrightReusableMethod.getPlayWright().close();
     }
 }
