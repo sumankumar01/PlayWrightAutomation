@@ -1,21 +1,22 @@
 package com.automation.PlayWrightAutomation.PlayWrightAutomation.webUtil;
 
 
+import com.automation.PlayWrightAutomation.PlayWrightAutomation.BaseOperation;
 import com.automation.PlayWrightAutomation.PlayWrightAutomation.config.PlayWrightReusableMethod;
 import com.automation.PlayWrightAutomation.PlayWrightAutomation.utility.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class PlayWrightUtil{
-  @Autowired
-   PlayWrightReusableMethod playWrightReusableMethod;
+public class PlayWrightUtil extends BaseOperation {
+
     public void navigate()
     {
         this.playWrightReusableMethod.getPlayWrightPage().navigate("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
@@ -81,6 +82,9 @@ public class PlayWrightUtil{
                 return false;
 
         }
+    }
+    public void waittime(long timeoutMillis) throws InterruptedException {
+        //this.playWrightReusableMethod.getPlayWrightPage().wait(timeoutMillis);
     }
 
 }

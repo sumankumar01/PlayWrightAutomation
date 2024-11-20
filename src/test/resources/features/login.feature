@@ -1,4 +1,4 @@
-Feature: Google search
+Feature: login functionality
 
   @smoke
   Scenario Outline: I want to login orange hrm

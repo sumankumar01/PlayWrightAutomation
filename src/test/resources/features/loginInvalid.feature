@@ -1,4 +1,4 @@
-Feature: Google search
+Feature: login functionality negative
 
   @smoke
   Scenario Outline: I want to login orange hrm for negative with invalid credential
@@ -10,4 +10,4 @@ Feature: Google search
 
     Examples:
       | username     | password       |
-      | suman        | kumar       |
+      | suman        | kumar          |

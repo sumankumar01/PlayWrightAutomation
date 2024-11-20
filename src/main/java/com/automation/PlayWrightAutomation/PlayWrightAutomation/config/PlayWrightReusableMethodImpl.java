@@ -41,7 +41,7 @@ public class PlayWrightReusableMethodImpl implements PlayWrightReusableMethod {
 
     @Override
     public void setPlayWrightBrowserContext() {
-        browserContext= getPlayWrightBrowser().newContext(new Browser.NewContextOptions().setViewportSize(null));
+        browserContext= getPlayWrightBrowser().newContext(new Browser.NewContextOptions().setViewportSize(1920,1080));
     }
 
     @Override

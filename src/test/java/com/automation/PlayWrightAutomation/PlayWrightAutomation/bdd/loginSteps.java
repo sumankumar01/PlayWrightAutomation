@@ -1,6 +1,7 @@
 package com.automation.PlayWrightAutomation.PlayWrightAutomation.bdd;
 
 import com.automation.PlayWrightAutomation.PlayWrightAutomation.BaseOperation;
+import com.automation.PlayWrightAutomation.PlayWrightAutomation.config.PlayWrightReusableMethod;
 import com.automation.PlayWrightAutomation.PlayWrightAutomation.util.Utility;
 import com.automation.PlayWrightAutomation.PlayWrightAutomation.webUtil.PlayWrightUtil;
 import io.cucumber.java.en.Given;
@@ -10,6 +11,7 @@ import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.testng.Assert;
 
@@ -23,6 +25,8 @@ public class loginSteps {
 
     @Autowired
     PlayWrightUtil playWrightUtil;
+
+
 
     @Given("I am on the orangehrm sites")
     public void iAmOnTheOrangehrmSites() {
@@ -45,11 +49,13 @@ public class loginSteps {
     @Then("I verify home page")
     public void iVerifyHomePage() throws InterruptedException {
         Thread.sleep(1000);
+        //this.playWrightUtil.waittime(1000);
        Assert.assertTrue(this.playWrightUtil.validation(GET_BY_TEXT,"Time at Work"));
     }
 
     @Then("I verify login error msg")
-    public void iVerifyLoginErrorMsg() {
-        Assert.assertFalse(this.playWrightUtil.validation(GET_BY_TEXT,"Invalid credentials"));
+    public void iVerifyLoginErrorMsg() throws InterruptedException {
+        Thread.sleep(1000);
+        Assert.assertTrue(this.playWrightUtil.validation(GET_BY_TEXT,"Invalid credentials"));
     }
 }
