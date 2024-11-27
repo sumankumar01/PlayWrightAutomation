@@ -2,4 +2,4 @@
 #junit.jupiter.execution.parallel.mode.default: concurrent
 Browser:
   name: chrome
-  headless: false
+  headless: true
